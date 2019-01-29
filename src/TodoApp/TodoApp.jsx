@@ -4,6 +4,24 @@ import Store from './store';
 import {ADD_TODO, TOGGLE_TODO, VISIBILITY_FILTER, SHOW_ALL, SHOW_TODO, SHOW_DONE} from './instant';
 import {connect} from 'react-redux';
 
+// extracting action creators from the components to keep code maintainable and self-documenting
+
+const addTodo = (text) => {
+    return {
+        type: ADD_TODO,
+        text
+    }
+}
+
+const toggleTodo = (id) => {
+    return {type: TOGGLE_TODO, id}
+}
+
+const setVisibility = (visibility) => {
+    return {type: VISIBILITY_FILTER, visibility}
+}
+
+
 const Link = ({active, children, onFilterLinkClick}) => {
     return (
         <>
@@ -25,7 +43,7 @@ const mapStateToLinkProps = (state, ownProps) => {
 
 const mapDispatchToLinkProps = (dispatch, ownProps) => {
     return {
-        onFilterLinkClick: () => Store.dispatch({type: VISIBILITY_FILTER, visibility: ownProps.visibility})
+        onFilterLinkClick: () => Store.dispatch(setVisibility(ownProps.visibility))
     }
 }
 
@@ -56,7 +74,7 @@ class InputTodo extends Component {
             <>
                 <input type="text" ref={this.todoInput}/>
                 <button onClick={() => {
-                    dispatch({type: ADD_TODO, text: this.todoInput.current.value})
+                    dispatch(addTodo(this.todoInput.current.value))
                     this.todoInput.current.value = '';
                 }}>Add Todo
                 </button>
@@ -104,7 +122,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onTodoClick: (id) => {
-            dispatch({type: TOGGLE_TODO, id})
+            dispatch(toggleTodo(id))
         }
     }
 }
