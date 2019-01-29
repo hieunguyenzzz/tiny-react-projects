@@ -16,31 +16,20 @@ const Link = ({active, children, onFilterLinkClick}) => {
     );
 }
 
-
-class FilterLink extends Component {
-
-    componentDidMount() {
-        this.unsubscribe = Store.subscribe(() => {
-            this.forceUpdate();
-        })
-    }
-
-    componentWillUnmount() {
-        this.unsubscribe();
-    }
-
-
-    render() {
-        const {visibility, children} = this.props;
-        const currentFilter = Store.getState().visibility;
-        return (
-            <Link active={visibility === currentFilter}
-                  onFilterLinkClick={() => Store.dispatch({type: VISIBILITY_FILTER, visibility})}>
-                {children}
-            </Link>
-        );
+// the ownProps is props of the <Link />
+const mapStateToLinkProps = (state, ownProps) => {
+    return {
+        active: ownProps.visibility === state.visibility
     }
 }
+
+const mapDispatchToLinkProps = (dispatch, ownProps) => {
+    return {
+        onFilterLinkClick: () => Store.dispatch({type: VISIBILITY_FILTER, visibility: ownProps.visibility})
+    }
+}
+
+const FilterLink = connect(mapStateToLinkProps, mapDispatchToLinkProps)(Link);
 
 class Footer extends Component {
     render() {
@@ -55,12 +44,12 @@ class Footer extends Component {
 }
 
 
-
 class InputTodo extends Component {
     constructor(props) {
         super(props);
         this.todoInput = React.createRef();
     }
+
     render() {
         const {dispatch} = this.props;
         return (
@@ -75,6 +64,7 @@ class InputTodo extends Component {
         );
     }
 }
+
 InputTodo = connect()(InputTodo);
 
 const Todo = ({id, complete, text, onClick}) => {
@@ -128,8 +118,8 @@ class TodoApp extends Component {
     render() {
         return (
             <>
-                <InputTodo />
-                <VisibleTodoList />
+                <InputTodo/>
+                <VisibleTodoList/>
                 <Footer/>
             </>
         )
