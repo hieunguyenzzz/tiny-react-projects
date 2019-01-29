@@ -62,11 +62,12 @@ class InputTodo extends Component {
         this.todoInput = React.createRef();
     }
     render() {
+        const {dispatch} = this.props;
         return (
             <>
                 <input type="text" ref={this.todoInput}/>
                 <button onClick={() => {
-                    Store.dispatch({type: ADD_TODO, text: this.todoInput.current.value})
+                    dispatch({type: ADD_TODO, text: this.todoInput.current.value})
                     this.todoInput.current.value = '';
                 }}>Add Todo
                 </button>
@@ -74,6 +75,7 @@ class InputTodo extends Component {
         );
     }
 }
+InputTodo = connect()(InputTodo);
 
 const Todo = ({id, complete, text, onClick}) => {
     return (
