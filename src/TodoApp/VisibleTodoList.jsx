@@ -1,5 +1,4 @@
-import React, {Component} from 'react';
-import {} from 'semantic-ui-react';
+import React from 'react';
 import {toggleTodo} from "./actions";
 import {SHOW_DONE, SHOW_TODO} from "./instant";
 import {connect} from "react-redux";

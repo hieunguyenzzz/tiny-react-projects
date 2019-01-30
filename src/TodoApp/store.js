@@ -4,13 +4,18 @@ import {loadState, saveState} from "./localStorage";
 import throttle from 'lodash/throttle';
 
 const persistedState = loadState();
-const store = createStore(RootReducer, {
-    todos: persistedState.todos
-});
+const configureStore = () => {
+    const store = createStore(RootReducer, {
+        todos: persistedState.todos
+    });
 
-store.subscribe(throttle(() => {
-    saveState(store.getState());
-}, 1000))
+    store.subscribe(throttle(() => {
+        saveState(store.getState());
+    }, 1000))
 
-export default store;
+    return store;
+
+}
+
+export default configureStore;
 
