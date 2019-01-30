@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {} from 'semantic-ui-react';
 import {SHOW_ALL, SHOW_DONE, SHOW_TODO} from "./instant";
-import FilterLink from './Link';
+import FilterLink from './FilterLink';
 
 class Footer extends Component {
     render() {
