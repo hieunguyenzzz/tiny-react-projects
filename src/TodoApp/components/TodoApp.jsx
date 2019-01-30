@@ -7,7 +7,7 @@ const TodoApp = ({ match }) => {
         return (
             <>
                 <InputTodo/>
-                <VisibleTodoList filter={match.params.filter}/>
+                <VisibleTodoList filter={match.params.filter || 'all'}/>
                 <Footer/>
             </>
         )

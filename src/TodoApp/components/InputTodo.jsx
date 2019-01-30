@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import {} from 'semantic-ui-react';
-import {addTodo} from "./actions";
+import {addTodo} from "../action/actions";
 import {connect} from "react-redux";
 
 class InputTodo extends Component {

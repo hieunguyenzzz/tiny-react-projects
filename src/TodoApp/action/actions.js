@@ -1,4 +1,4 @@
-import {ADD_TODO, TOGGLE_TODO, VISIBILITY_FILTER} from "./instant";
+import {ADD_TODO, TOGGLE_TODO, VISIBILITY_FILTER} from "../instant";
 
 export const addTodo = (text) => {
     return {

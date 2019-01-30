@@ -1,5 +1,5 @@
 import {createStore} from 'redux';
-import RootReducer from './reducers'
+import RootReducer from './reducer/reducers'
 import {loadState, saveState} from "./localStorage";
 import throttle from 'lodash/throttle';
 

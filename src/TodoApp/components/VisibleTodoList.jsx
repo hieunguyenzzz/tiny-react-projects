@@ -1,6 +1,6 @@
 import React from 'react';
-import {toggleTodo} from "./actions";
-import {SHOW_DONE, SHOW_TODO} from "./instant";
+import {toggleTodo} from "../action/actions";
+import {SHOW_DONE, SHOW_TODO} from "../instant";
 import {connect} from "react-redux";
 
 const Todo = ({id, complete, text, onClick}) => {

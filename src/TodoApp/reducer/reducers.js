@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import {ADD_TODO, TOGGLE_TODO, VISIBILITY_FILTER, SHOW_ALL} from './instant'
+import {ADD_TODO, TOGGLE_TODO} from '../instant'
 
 const initialState = {};
 
