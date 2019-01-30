@@ -1,7 +1,7 @@
 import {createStore} from 'redux';
-import RootReducer from './reducer/reducers'
 import {loadState, saveState} from "./localStorage";
 import throttle from 'lodash/throttle';
+import RootReducer from './reducer/index'
 
 const persistedState = loadState();
 const configureStore = () => {
@@ -16,6 +16,7 @@ const configureStore = () => {
     return store;
 
 }
+
 
 export default configureStore;
 

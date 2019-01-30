@@ -1,8 +1,8 @@
 import React from 'react';
 import {toggleTodo} from "../action/actions";
-import {SHOW_DONE, SHOW_TODO} from "../instant";
 import {connect} from "react-redux";
 import {withRouter} from 'react-router';
+import {getVisibleTodos} from '../reducer/index'
 
 const Todo = ({id, complete, text, onClick}) => {
     return (
@@ -21,20 +21,11 @@ const TodoList = ({todos, onTodoClick}) => {
     )
 }
 
-const getVisibleTodos = (todos, visibility) => {
-    switch (visibility) {
-        case SHOW_DONE:
-            return todos.filter(t => t.complete);
-        case  SHOW_TODO:
-            return todos.filter(t => !t.complete);
-        default:
-            return todos;
-    }
-}
+
 
 const mapStateToProps = (state, {filter}) => {
     return {
-        todos: getVisibleTodos(state.todos, filter === undefined ? 'all' : filter)
+        todos: getVisibleTodos(state, filter === undefined ? 'all' : filter)
     }
 }
 

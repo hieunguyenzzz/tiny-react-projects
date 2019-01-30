@@ -1,5 +1,5 @@
-import {combineReducers} from 'redux';
-import {ADD_TODO, TOGGLE_TODO} from '../instant'
+
+import {ADD_TODO, SHOW_DONE, SHOW_TODO, TOGGLE_TODO} from '../instant'
 
 const initialState = {};
 
@@ -25,9 +25,18 @@ const todos = (todos = [], action) => {
     }
 }
 
+export const getVisibleTodos = (state, visibility) => {
+    switch (visibility) {
+        case SHOW_DONE:
+            return state.filter(t => t.complete);
+        case  SHOW_TODO:
+            return state.filter(t => !t.complete);
+        default:
+            return state;
+    }
+}
 
-export default combineReducers({
-    todos
-})
+
+export default todos;
 
 
