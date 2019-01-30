@@ -25,7 +25,7 @@ const mapStateToLinkProps = (state, ownProps) => {
 
 const mapDispatchToLinkProps = (dispatch, ownProps) => {
     return {
-        onFilterLinkClick: () => Store.dispatch(setVisibility(ownProps.visibility))
+        onFilterLinkClick: () => dispatch(setVisibility(ownProps.visibility))
     }
 }
 
