@@ -1,18 +1,16 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Footer from './Footer'
 import InputTodo from './InputTodo'
 import VisibleTodoList from './VisibleTodoList'
 
-class TodoApp extends Component {
-    render() {
+const TodoApp = ({ match }) => {
         return (
             <>
                 <InputTodo/>
-                <VisibleTodoList/>
+                <VisibleTodoList filter={match.params.filter}/>
                 <Footer/>
             </>
         )
-    }
 }
 
 export default TodoApp;

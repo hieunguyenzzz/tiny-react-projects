@@ -20,7 +20,7 @@ const TodoList = ({todos, onTodoClick}) => {
     )
 }
 
-const getVisibleTodos = ({todos, visibility}) => {
+const getVisibleTodos = (todos, visibility) => {
     switch (visibility) {
         case SHOW_DONE:
             return todos.filter(t => t.complete);
@@ -31,9 +31,9 @@ const getVisibleTodos = ({todos, visibility}) => {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
     return {
-        todos: getVisibleTodos(state)
+        todos: getVisibleTodos(state.todos, ownProps.filter)
     }
 }
 

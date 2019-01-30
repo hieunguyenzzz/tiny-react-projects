@@ -10,8 +10,3 @@ export const addTodo = (text) => {
 export const toggleTodo = (id) => {
     return {type: TOGGLE_TODO, id}
 }
-
-export const setVisibility = (visibility) => {
-    return {type: VISIBILITY_FILTER, visibility}
-}
-

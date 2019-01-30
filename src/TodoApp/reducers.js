@@ -25,20 +25,9 @@ const todos = (todos = [], action) => {
     }
 }
 
-const visibility = (visibility = SHOW_ALL, action) => {
-    switch (action.type) {
-        case VISIBILITY_FILTER:
-            return action.visibility;
-        default:
-            return visibility
-    }
-}
-
-
 
 export default combineReducers({
-    todos,
-    visibility
+    todos
 })
 
 
