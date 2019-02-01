@@ -10,8 +10,8 @@ export const addTodo = (text) => {
     }
 }
 
-export const loadTodos = (filter) => {
-    return fakeBackend(filter).then(response => receiveTodos(filter, response))
+export const loadTodos = (filter) => (dispath) => {
+    return fakeBackend(filter).then(response => dispath(receiveTodos(filter, response)))
 }
 
 const receiveTodos = (filter, response) => {
