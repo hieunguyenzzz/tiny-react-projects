@@ -1,4 +1,4 @@
-import {ADD_TODO, SHOW_DONE, SHOW_TODO, TOGGLE_TODO} from '../instant'
+import {ADD_TODO, RECEIVE_TODOS, TOGGLE_TODO} from '../instant'
 import todo from './todo';
 import {combineReducers} from "redux";
 const initialState = {};
@@ -10,16 +10,22 @@ const byId = (todos = {}, action) => {
         case TOGGLE_TODO:
             return {...todos,
                 [action.id]: todo(todos[action.id], action)
-            }
+            };
+        case RECEIVE_TODOS:
+            const nextState = {...todos};
+            action.response.forEach(item => {
+                nextState[item.id] = item
+            })
+            return nextState;
         default:
             return todos;
     }
 }
 
-const allIds = (state = [], action) => {
+const allIdsByFilter = (state = [], action) => {
     switch (action.type) {
-        case ADD_TODO:
-            return [...state, action.id]
+        case RECEIVE_TODOS:
+            return action.response.map(todo => todo.id);
         default:
             return state;
     }
@@ -27,22 +33,11 @@ const allIds = (state = [], action) => {
 
 const todos = combineReducers({
     byId,
-    allIds
+    allIdsByFilter
 })
 
-const getAllTodos = (state) => state.allIds.map(id => state.byId[id]);
-
-
 export const getVisibleTodos = (state, visibility) => {
-    const allTodos = getAllTodos(state);
-    switch (visibility) {
-        case SHOW_DONE:
-            return allTodos.filter(t => t.complete);
-        case  SHOW_TODO:
-            return allTodos.filter(t => !t.complete);
-        default:
-            return allTodos;
-    }
+    return state.allIdsByFilter.map(id => state.byId[id]);
 }
 
 

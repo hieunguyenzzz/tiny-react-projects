@@ -9,7 +9,7 @@ const fakeDatabase = {
     {
         id: 2,
         text: "Feed the dog",
-        complete: false
+        complete: true
     }]
 }
 
@@ -21,9 +21,9 @@ const fakeBackend = (filter) => {
     return delay(500).then(() => {
         switch (filter) {
             case SHOW_DONE:
-                return fakeDatabase.todos.filter(todo => todo.complement);
+                return fakeDatabase.todos.filter(todo => todo.complete);
             case SHOW_TODO:
-                return fakeDatabase.todos.filter(todo => !todo.complement);
+                return fakeDatabase.todos.filter(todo => !todo.complete);
             case SHOW_ALL:
                 return fakeDatabase.todos;
             default:
