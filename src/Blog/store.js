@@ -1,4 +1,5 @@
 import {createStore, applyMiddleware} from 'redux';
+import promise from 'redux-promise';
 import RootReducer from './reducer/index'
 
 const thunk = (store) => (next) => (action) => {
@@ -8,14 +9,8 @@ const thunk = (store) => (next) => (action) => {
     return next(action);
 
 }
-
-const logging = (store) => (next) => (action) => {
-    console.log(action);
-    return next(action);
-}
-
 const configureStore = () => {
-    const middleWares = [thunk, logging];
+    const middleWares = [thunk];
     return createStore(RootReducer, applyMiddleware(...middleWares));
 }
 

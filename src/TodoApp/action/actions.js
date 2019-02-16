@@ -1,13 +1,15 @@
 import {ADD_TODO, RECEIVE_TODOS, TOGGLE_TODO} from "../instant";
 import v4 from "node-uuid";
 import fakeBackend from "../api";
+import {postTodo} from "../api"
 
-export const addTodo = (text) => {
-    return {
-        type: ADD_TODO,
+export const addTodo = (text) => (dispatch) => {
+    const todo = {
         id: v4(),
-        text
+        text,
+        complete:false
     }
+    return postTodo(todo).then(() => dispatch(loadTodos('all')))
 }
 
 export const loadTodos = (filter) => (dispath) => {

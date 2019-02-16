@@ -22,7 +22,11 @@ const byId = (todos = {}, action) => {
     }
 }
 
-const allIdsByFilter = (state = [], action) => {
+const allIdsByFilter = (visibility) => (state = [], action) => {
+    if (action.filter !== visibility) {
+        return state;
+    }
+
     switch (action.type) {
         case RECEIVE_TODOS:
             return action.response.map(todo => todo.id);
@@ -31,13 +35,17 @@ const allIdsByFilter = (state = [], action) => {
     }
 }
 
+
+
 const todos = combineReducers({
     byId,
-    allIdsByFilter
+    complete: allIdsByFilter('complete'),
+    todo: allIdsByFilter('todo'),
+    all: allIdsByFilter('all')
 })
 
 export const getVisibleTodos = (state, visibility) => {
-    return state.allIdsByFilter.map(id => state.byId[id]);
+    return state[visibility].map(id => state.byId[id]);
 }
 
 

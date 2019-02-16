@@ -32,4 +32,10 @@ const fakeBackend = (filter) => {
     })
 }
 
+export const postTodo = (todo) => {
+    return delay(500).then(() => {
+        fakeDatabase.todos.push(todo);
+    });
+}
+
 export default fakeBackend;
